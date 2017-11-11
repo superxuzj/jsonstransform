@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boliangshenghe.jsontransform.repository.JdataMapper" >
+  <resultMap id="BaseResultMap" type="com.boliangshenghe.jsontransform.entity.Jdata" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="eventID" property="eventid" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="LOCATION" property="location" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="COUNT" property="count" jdbcType="INTEGER" />
+    <result column="CREATOR_TIME" property="creatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, eventID, TITLE, LOCATION, TIME, CONTENT, TYPE, COUNT, CREATOR_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jdata
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jdata
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
+    insert into t_jdata (ID, eventID, TITLE, 
+      LOCATION, TIME, CONTENT, 
+      TYPE, COUNT, CREATOR_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{eventid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{creatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
+    insert into t_jdata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="eventid != null" >
+        eventID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="location != null" >
+        LOCATION,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="count != null" >
+        COUNT,
+      </if>
+      <if test="creatorTime != null" >
+        CREATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eventid != null" >
+        #{eventid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="creatorTime != null" >
+        #{creatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
+    update t_jdata
+    <set >
+      <if test="eventid != null" >
+        eventID = #{eventid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        COUNT = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="creatorTime != null" >
+        CREATOR_TIME = #{creatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
+    update t_jdata
+    set eventID = #{eventid,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      LOCATION = #{location,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      COUNT = #{count,jdbcType=INTEGER},
+      CREATOR_TIME = #{creatorTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectJdataList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.jsontransform.entity.Jdata">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_jdata
+    <where>
+        <if test="type != null">
+            AND TYPE = #{type,jdbcType=VARCHAR}
+        </if>
+    </where>
+    ORDER BY eventID DESC
+   	</select>
+   	
+  <select id="selectJdataEventIDList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.jsontransform.entity.Jdata">
+   	    select 
+   ID,eventID
+    from t_jdata
+    <where>
+        <if test="type != null">
+            AND TYPE = #{type,jdbcType=VARCHAR}
+        </if>
+    </where>
+    ORDER BY eventID DESC
+   	</select>
+</mapper>

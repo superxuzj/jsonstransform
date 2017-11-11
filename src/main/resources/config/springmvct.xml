@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- 本配置文件是 名称为springmvc的DispatcherServlet使用，提供其相关的Spring MVC配置 -->
+
+
+	<!-- 启动Spring基于annotation的DI，使用户可以在Springmvc中使用Spring的强大功能。 -->
+	<context:annotation-config />
+
+	<!-- DispatcherServlet上下文，只管理@Controller类型的bean，忽略其他型的bean如@service -->
+	<context:component-scan base-package="com.boliangshenghe.jsontransform.controller">
+		<context:include-filter type="annotation"
+        	expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 扩充注解驱动，可以将请求参数绑定到控制器参数 url查询参数的某个变量 可以直接映射到Controller方法的输入参数 -->
+	<mvc:annotation-driven />
+	
+	<!-- Freemarker -->
+	<bean id="blockDirective" class="com.boliangshenghe.jsontransform.common.freemarker.BlockDirective"/>
+	<bean id="extendsDirective" class="com.boliangshenghe.jsontransform.common.freemarker.ExtendsDirective"/>
+	<bean id="overrideDirective" class="com.boliangshenghe.jsontransform.common.freemarker.OverrideDirective"/>
+	<bean id="superDirective" class="com.boliangshenghe.jsontransform.common.freemarker.SuperDirective"/>
+	
+  <!-- 配置ViewResolver。 可以用多个ViewResolver 使用order属性排序 InternalResourceViewResolver放在最后 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass" value="com.boliangshenghe.jsontransform.common.freemarker.view.HTMLFreeMarkerView" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+		<property name="requestContextAttribute" value="rc"></property>
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<!-- 开启Spring 对 FreeMarker 宏命令的支持 -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="allowSessionOverride" value="true" />
+	</bean>
+
+	<!-- Freemarker配置 -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/views/" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="number_format">#.##</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="classic_compatible">true</prop>
+				<prop key="template_exception_handler">ignore</prop>
+				
+				<prop key="auto_import">/macros/elearning_macros.ftl as ps</prop>
+			</props>
+		</property>
+		
+		 <property name="freemarkerVariables">
+			<map>
+				<entry key="extends" value-ref="extendsDirective"></entry>
+                <entry key="override" value-ref="overrideDirective"></entry>
+                <entry key="block" value-ref="blockDirective"></entry>
+                <entry key="super" value-ref="superDirective"></entry>
+			</map>
+			
+		</property>
+		
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="209715200" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="true" />
+	</bean>
+
+	<!-- <mvc:resources mapping="/html/**" location="/WEB-INF/views/html/" />
+	<mvc:resources mapping="/code/**" location="/WEB-INF/views/code/" /> -->
+	 <mvc:resources mapping="/jsontransformstatic/**" location="/jsontransformstatic/" />
+	 <mvc:resources mapping="/html/**" location="/html/" />
+	 
+	 <task:annotation-driven/>
+	 <context:component-scan base-package="com.boliangshenghe.jsontransform.controller"></context:component-scan>
+</beans>
