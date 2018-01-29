@@ -95,7 +95,7 @@ public class FtpClienUtil {
 			while ((filename = dis.readLine()) != null) {
 				list.add(filename);
 			}
-			System.out.println("list");
+			//System.out.println("list");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

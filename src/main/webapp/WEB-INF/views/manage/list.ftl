@@ -2,7 +2,7 @@
 <div class="row-fluid">
 	<div class="block">
 		<div class="navbar navbar-inner block-header">
-			<div class="muted pull-left">爬虫抓取列表</div>
+			<div class="muted pull-left">地震信息列表</div>
 		</div>
 		<div class="block-content collapse in">
 			<div class="span12">

@@ -15,6 +15,16 @@ public class Jdata {
 
     private String content;
 
+    private String weather;
+
+    private String towncount;
+
+    private String demaver;
+
+    private String peoplesum;
+
+    private String hazardcount;
+
     private String type;
 
     private Integer count;
@@ -67,6 +77,46 @@ public class Jdata {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather == null ? null : weather.trim();
+    }
+
+    public String getTowncount() {
+        return towncount;
+    }
+
+    public void setTowncount(String towncount) {
+        this.towncount = towncount == null ? null : towncount.trim();
+    }
+
+    public String getDemaver() {
+        return demaver;
+    }
+
+    public void setDemaver(String demaver) {
+        this.demaver = demaver == null ? null : demaver.trim();
+    }
+
+    public String getPeoplesum() {
+        return peoplesum;
+    }
+
+    public void setPeoplesum(String peoplesum) {
+        this.peoplesum = peoplesum == null ? null : peoplesum.trim();
+    }
+
+    public String getHazardcount() {
+        return hazardcount;
+    }
+
+    public void setHazardcount(String hazardcount) {
+        this.hazardcount = hazardcount == null ? null : hazardcount.trim();
     }
 
     public String getType() {

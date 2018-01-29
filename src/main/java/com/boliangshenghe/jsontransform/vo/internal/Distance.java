@@ -20,6 +20,7 @@ public class Distance {
     public int DistanceToCounty;
     @JsonProperty
     public int DistanceToCity;
+    
     public void setNearestTownDistance(int nearestTownDistance) {
          this.nearestTownDistance = nearestTownDistance;
      }

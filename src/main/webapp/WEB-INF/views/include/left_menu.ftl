@@ -4,6 +4,9 @@
 			菜单</a></li>
 	<li class="wid <#if type='1'>activeli</#if>"><a href="/manage/list?type=1"><i
 			class="icon-chevron-right"></i> 国内模板数据</a></li>
+			
+	<li class="wid <#if type='4'>activeli</#if>"><a href="/manage/list?type=4"><i
+			class="icon-chevron-right"></i> 台湾模板数据</a></li>
 
 	<li class="wid <#if type='2'>activeli</#if>"><a href="/manage/list?type=2"><i
 			class="icon-chevron-right"></i> 海洋模板数据</a></li>

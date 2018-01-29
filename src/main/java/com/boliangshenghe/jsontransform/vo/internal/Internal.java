@@ -13,6 +13,7 @@ public class Internal {
 
     private int elevation;
     private Hazard hazard;
+    private int dem_aver;
     private String weather;
     private String lat;
     private Population population;
@@ -114,5 +115,11 @@ public class Internal {
      public Time getTime() {
          return time;
      }
+	public int getDem_aver() {
+		return dem_aver;
+	}
+	public void setDem_aver(int dem_aver) {
+		this.dem_aver = dem_aver;
+	}
 
 }

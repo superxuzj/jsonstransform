@@ -8,12 +8,18 @@
     <result column="LOCATION" property="location" jdbcType="VARCHAR" />
     <result column="TIME" property="time" jdbcType="VARCHAR" />
     <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="weather" property="weather" jdbcType="VARCHAR" />
+    <result column="towncount" property="towncount" jdbcType="VARCHAR" />
+    <result column="demaver" property="demaver" jdbcType="VARCHAR" />
+    <result column="peoplesum" property="peoplesum" jdbcType="VARCHAR" />
+    <result column="hazardcount" property="hazardcount" jdbcType="VARCHAR" />
     <result column="TYPE" property="type" jdbcType="VARCHAR" />
     <result column="COUNT" property="count" jdbcType="INTEGER" />
     <result column="CREATOR_TIME" property="creatorTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, eventID, TITLE, LOCATION, TIME, CONTENT, TYPE, COUNT, CREATOR_TIME
+    ID, eventID, TITLE, LOCATION, TIME, CONTENT, weather, towncount, demaver, peoplesum, 
+    hazardcount, TYPE, COUNT, CREATOR_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,12 +34,14 @@
   <insert id="insert" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
     insert into t_jdata (ID, eventID, TITLE, 
       LOCATION, TIME, CONTENT, 
-      TYPE, COUNT, CREATOR_TIME
-      )
+      weather, towncount, demaver, 
+      peoplesum, hazardcount, TYPE, 
+      COUNT, CREATOR_TIME)
     values (#{id,jdbcType=INTEGER}, #{eventid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{creatorTime,jdbcType=TIMESTAMP}
-      )
+      #{weather,jdbcType=VARCHAR}, #{towncount,jdbcType=VARCHAR}, #{demaver,jdbcType=VARCHAR}, 
+      #{peoplesum,jdbcType=VARCHAR}, #{hazardcount,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER}, #{creatorTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.jsontransform.entity.Jdata" >
     insert into t_jdata
@@ -55,6 +63,21 @@
       </if>
       <if test="content != null" >
         CONTENT,
+      </if>
+      <if test="weather != null" >
+        weather,
+      </if>
+      <if test="towncount != null" >
+        towncount,
+      </if>
+      <if test="demaver != null" >
+        demaver,
+      </if>
+      <if test="peoplesum != null" >
+        peoplesum,
+      </if>
+      <if test="hazardcount != null" >
+        hazardcount,
       </if>
       <if test="type != null" >
         TYPE,
@@ -85,6 +108,21 @@
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
+      <if test="weather != null" >
+        #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="towncount != null" >
+        #{towncount,jdbcType=VARCHAR},
+      </if>
+      <if test="demaver != null" >
+        #{demaver,jdbcType=VARCHAR},
+      </if>
+      <if test="peoplesum != null" >
+        #{peoplesum,jdbcType=VARCHAR},
+      </if>
+      <if test="hazardcount != null" >
+        #{hazardcount,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
       </if>
@@ -114,6 +152,21 @@
       <if test="content != null" >
         CONTENT = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="weather != null" >
+        weather = #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="towncount != null" >
+        towncount = #{towncount,jdbcType=VARCHAR},
+      </if>
+      <if test="demaver != null" >
+        demaver = #{demaver,jdbcType=VARCHAR},
+      </if>
+      <if test="peoplesum != null" >
+        peoplesum = #{peoplesum,jdbcType=VARCHAR},
+      </if>
+      <if test="hazardcount != null" >
+        hazardcount = #{hazardcount,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         TYPE = #{type,jdbcType=VARCHAR},
       </if>
@@ -133,6 +186,11 @@
       LOCATION = #{location,jdbcType=VARCHAR},
       TIME = #{time,jdbcType=VARCHAR},
       CONTENT = #{content,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR},
+      towncount = #{towncount,jdbcType=VARCHAR},
+      demaver = #{demaver,jdbcType=VARCHAR},
+      peoplesum = #{peoplesum,jdbcType=VARCHAR},
+      hazardcount = #{hazardcount,jdbcType=VARCHAR},
       TYPE = #{type,jdbcType=VARCHAR},
       COUNT = #{count,jdbcType=INTEGER},
       CREATOR_TIME = #{creatorTime,jdbcType=TIMESTAMP}
@@ -144,6 +202,9 @@
     <include refid="Base_Column_List" />
     from t_jdata
     <where>
+        <if test="eventid != null">
+            AND eventID LIKE '%${eventid}%'
+        </if>
         <if test="type != null">
             AND TYPE = #{type,jdbcType=VARCHAR}
         </if>

@@ -3,6 +3,8 @@
   */
 package com.boliangshenghe.jsontransform.vo.internal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Auto-generated: 2017-09-20 10:28:6
  *
@@ -12,7 +14,8 @@ package com.boliangshenghe.jsontransform.vo.internal;
 public class Stastics {
 
     private int townCount;
-    private int VillageCount;
+    @JsonProperty
+    public int VillageCount;
     public void setTownCount(int townCount) {
          this.townCount = townCount;
      }
